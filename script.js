@@ -12,8 +12,10 @@ yesBtn.addEventListener("click", () => {
   noBtn.style.display = "none";
 });
 
-// Function to move NO button
-function moveNoButton() {
+// Move function
+function moveNoButton(e) {
+  e.preventDefault(); // 🔥 IMPORTANT for mobile
+
   const wrapperRect = wrapper.getBoundingClientRect();
   const noBtnRect = noBtn.getBoundingClientRect();
 
@@ -27,8 +29,9 @@ function moveNoButton() {
   noBtn.style.top = randomY + "px";
 }
 
-// 🖥️ PC → mouse hover
-noBtn.addEventListener("mouseover", moveNoButton);
+// 🖥️ PC
+noBtn.addEventListener("mouseenter", moveNoButton);
 
-// 📱 MOBILE → touch
-noBtn.addEventListener("touchstart", moveNoButton);
+// 📱 MOBILE (important)
+noBtn.addEventListener("touchstart", moveNoButton, { passive: false });
+noBtn.addEventListener("touchmove", moveNoButton, { passive: false });
