@@ -2,30 +2,33 @@ const yesBtn = document.querySelector(".yes-btn");
 const noBtn = document.querySelector(".no-btn");
 const question = document.querySelector(".question");
 const gif = document.querySelector(".gif");
+const wrapper = document.querySelector(".wrapper");
 
-// Change text and gif when the Yes button is clicked
+// YES button
 yesBtn.addEventListener("click", () => {
-    question.innerHTML = "Kabhi nhi ho sagta";
-    gif.src = "https://media1.tenor.com/m/VfNHcJ6mcz0AAAAd/roblox-lol-roblox.gif";
-
-    // Hide the No button
-    noBtn.style.display = "none";
+  question.innerHTML = "Kabhi nahi ho sakta 😎";
+  gif.src =
+    "https://media1.tenor.com/m/VfNHcJ6mcz0AAAAd/roblox-lol-roblox.gif";
+  noBtn.style.display = "none";
 });
 
-// Make the No button move randomly on hover
-noBtn.addEventListener("mouseover", () => {
-    const wrapper = document.querySelector(".wrapper");
-    const wrapperRect = wrapper.getBoundingClientRect();
-    const noBtnRect = noBtn.getBoundingClientRect();
+// Function to move NO button
+function moveNoButton() {
+  const wrapperRect = wrapper.getBoundingClientRect();
+  const noBtnRect = noBtn.getBoundingClientRect();
 
-    // Calculate max positions to ensure the button stays within the wrapper
-    const maxX = wrapperRect.width - noBtnRect.width;
-    const maxY = wrapperRect.height - noBtnRect.height;
+  const maxX = wrapperRect.width - noBtnRect.width;
+  const maxY = wrapperRect.height - noBtnRect.height;
 
-    // Ensure randomX and randomY are within the wrapper bounds
-    const randomX = Math.min(Math.floor(Math.random() * maxX), maxX);
-    const randomY = Math.min(Math.floor(Math.random() * maxY), maxY);
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
 
-    noBtn.style.left = randomX + "px";
-    noBtn.style.top = randomY + "px";
-});
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
+// 🖥️ PC → mouse hover
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// 📱 MOBILE → touch
+noBtn.addEventListener("touchstart", moveNoButton);
